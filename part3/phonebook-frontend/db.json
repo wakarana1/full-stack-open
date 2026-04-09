@@ -1,0 +1,30 @@
+{
+  "persons": [
+    {
+      "name": "Arto Hellas",
+      "number": "123-456-7890",
+      "id": "1"
+    },
+    {
+      "name": "Ada Lovelace",
+      "number": "39-44-5323523",
+      "id": "2"
+    },
+    {
+      "name": "Dan Abramov",
+      "number": "12-43-234345",
+      "id": "3"
+    },
+    {
+      "name": "waka",
+      "number": "0000000000",
+      "id": "QC52E5Kyrpc"
+    },
+    {
+      "name": "new",
+      "number": "0987654321",
+      "id": "hR6In4A2hqE"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
