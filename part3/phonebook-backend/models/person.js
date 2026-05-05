@@ -11,8 +11,8 @@ if (process.argv.length < 3) {
 const password = process.argv[2]
 const name = process.argv[3]
 const number = process.argv[4]
-// const url = process.env.MONGODB_URI
-const url = `mongodb+srv://wuchristophert_db_user:${password}@cluster0.xwjc6mm.mongodb.net/phonebookApp?retryWrites=true&w=majority&appName=Cluster0`
+const url = process.env.MONGODB_URI
+// const url = `mongodb+srv://wuchristophert_db_user:${password}@cluster0.xwjc6mm.mongodb.net/phonebookApp?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.connect(url, { family: 4 })
   .then(result => {
