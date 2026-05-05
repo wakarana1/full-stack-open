@@ -48,10 +48,13 @@ const App = () => {
       }
     } else {
       personServices.create({ name: newName, number: newNumber })
-      .then((response) => {
-        setPersons(people.concat(response))
+      .then((createdPerson) => {
+        setPersons(people.concat(createdPerson))
+        showMessage('success', `${newName} added to phonebook`)
       })
-      showMessage('success', `${newName} added to phonebook`)
+      .catch(error => {
+        showMessage('error', `${error.response.data.error}`)
+      })
     }
     setNewName('');
     setNewNumber('')

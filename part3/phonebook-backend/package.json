@@ -11,12 +11,15 @@
     "dev": "node --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "json-server -p 3001 db.json",
-    "build:ui": "ls && rm -rf dist && cd ../phonebook-frontend && npm install && npm run build && cp -r dist ../phonebook-backend",
+    "build:ui": "rm -rf dist && cd ../phonebook-frontend && npm run build && cp -r dist ../phonebook-backend",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   },
   "dependencies": {
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.5.0",
     "morgan": "^1.10.1"
   }
 }
