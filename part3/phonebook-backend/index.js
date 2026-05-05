@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
-const Person = require('./models/Person')
+const Person = require('./models/person')
 const errorHandler = require('./middleware/errorHandler')
 
 morgan.token('data', function getParams(params) {
