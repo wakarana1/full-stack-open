@@ -3,17 +3,9 @@ const mongoose = require('mongoose')
 
 mongoose.set('strictQuery', false)
 
-if (process.argv.length < 3) {
-  console.log('give password as argument')
-  process.exit(1)
-}
-
-const password = process.argv[2]
-const name = process.argv[3]
-const number = process.argv[4]
 const url = process.env.MONGODB_URI
-// const url = `mongodb+srv://wuchristophert_db_user:${password}@cluster0.xwjc6mm.mongodb.net/phonebookApp?retryWrites=true&w=majority&appName=Cluster0`
 
+console.log('connecting to', url)
 mongoose.connect(url, { family: 4 })
   .then(result => {
     console.log('connected to MongoDB')
