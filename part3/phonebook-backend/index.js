@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
-const Person = require('./models/person')
+const Person = require('./models/Person')
 const errorHandler = require('./middleware/errorHandler')
 
 morgan.token('data', function getParams(params) {
@@ -77,7 +77,10 @@ app.get('/api/persons/:id', (request, response, next) => {
       response.status(404).end()
     }
   })
-  .catch(error => next(error))
+  .catch(error => {
+    console.log('inside catch')
+    next(error)
+  })
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {

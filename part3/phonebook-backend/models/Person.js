@@ -16,10 +16,14 @@ mongoose.connect(url, { family: 4 })
 )
 
 const personSchema = new mongoose.Schema({
-  name: String,
-  number: {
+  name: {
     type: String,
     minLength: 3,
+    required: true
+  },
+  number: {
+    type: String,
+    minLength: 8,
     required: true,
     validate: {
       validator: function(v) {

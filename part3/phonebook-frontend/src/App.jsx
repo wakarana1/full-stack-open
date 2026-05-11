@@ -40,21 +40,23 @@ const App = () => {
     const matchedPerson = hasNameMatch(newName)
     if (matchedPerson) {
       if (window.confirm(`${newName} is already added to phonebook. Update number?`)) {
-        personServices.updatePerson(matchedPerson.id, { name: newName, number: newNumber })
-        .then((response) => {
-          setPersons(people.map(person => person.id === response.id ? response : person))
-        })
+        personServices
+          .updatePerson(matchedPerson.id, { name: newName, number: newNumber })
+          .then((response) => {
+            setPersons(people.map(person => person.id === response.id ? response : person))
+          })
         showMessage('success', `${newName} updated`)
       }
     } else {
-      personServices.create({ name: newName, number: newNumber })
-      .then((createdPerson) => {
-        setPersons(people.concat(createdPerson))
-        showMessage('success', `${newName} added to phonebook`)
-      })
-      .catch(error => {
-        showMessage('error', `${error.response.data.error}`)
-      })
+      personServices
+        .create({ name: newName, number: newNumber })
+        .then((createdPerson) => {
+          setPersons(people.concat(createdPerson))
+          showMessage('success', `${newName} added to phonebook`)
+        })
+        .catch(error => {
+          showMessage('error', `${error.response.data.error}`)
+        })
     }
     setNewName('');
     setNewNumber('')
