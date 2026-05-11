@@ -31,7 +31,6 @@ app.post('/api/persons', (request, response, next) => {
   person.save().then(savedPerson => {
     response.json(savedPerson)
   }).catch(error => next(error))
-  
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
@@ -50,7 +49,7 @@ app.put('/api/persons/:id', (request, response, next) => {
       response.json(updatedPerson)
     })
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 app.get('/api/persons', (request, response) => {
@@ -60,7 +59,7 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-  const currentDate = new Date();
+  const currentDate = new Date()
 
   response.send(`
     <p>Phonebook has info for ${Person.length} people</p>
@@ -77,10 +76,10 @@ app.get('/api/persons/:id', (request, response, next) => {
       response.status(404).end()
     }
   })
-  .catch(error => {
-    console.log('inside catch')
-    next(error)
-  })
+    .catch(error => {
+      console.log('inside catch')
+      next(error)
+    })
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
