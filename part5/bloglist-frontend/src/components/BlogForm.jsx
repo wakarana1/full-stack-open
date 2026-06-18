@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { Box, TextField, Button, Typography } from '@mui/material'
 
 const BlogForm = ({ createBlog }) => {
-  const [blogTitle, setBlogTitle] =useState('')
-  const [blogAuthor, setBlogAuthor] =useState('')
-  const [blogUrl, setBlogUrl] =useState('')
-  const [blogLikes, setBlogLikes] =useState('')
+  const [blogTitle, setBlogTitle] = useState('')
+  const [blogAuthor, setBlogAuthor] = useState('')
+  const [blogUrl, setBlogUrl] = useState('')
+  const [blogLikes, setBlogLikes] = useState('')
 
   const addBlog = (event) => {
     event.preventDefault()
@@ -14,7 +15,6 @@ const BlogForm = ({ createBlog }) => {
       url: blogUrl,
       likes: blogLikes
     })
-
     setBlogTitle('')
     setBlogAuthor('')
     setBlogUrl('')
@@ -22,37 +22,46 @@ const BlogForm = ({ createBlog }) => {
   }
 
   return (
-    <div>
-      <h2>Create a new blog</h2>
-      <form onSubmit={addBlog}>
-        <div>
-          <label>
-            Blog Title:
-            <input value={blogTitle} onChange={({ target }) => setBlogTitle(target.value)} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Blog Author:
-            <input value={blogAuthor} onChange={({ target }) => setBlogAuthor(target.value)} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Blog URL:
-            <input value={blogUrl} onChange={({ target }) => setBlogUrl(target.value)} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Blog Likes:
-            <input value={blogLikes} onChange={({ target }) => setBlogLikes(target.value)} />
-          </label>
-        </div>
-        <button type="submit">save</button>
-      </form>
-    </div>
-
+    <Box component="form" onSubmit={addBlog} sx={{ maxWidth: 500, mt: 2 }}>
+      <Typography variant="h5" gutterBottom>create new</Typography>
+      <TextField
+        id="blog-title"
+        label="Blog Title"
+        fullWidth
+        variant="outlined"
+        value={blogTitle}
+        onChange={({ target }) => setBlogTitle(target.value)}
+        sx={{ mb: 2 }}
+      />
+      <TextField
+        id="blog-author"
+        label="Blog Author"
+        fullWidth
+        variant="outlined"
+        value={blogAuthor}
+        onChange={({ target }) => setBlogAuthor(target.value)}
+        sx={{ mb: 2 }}
+      />
+      <TextField
+        id="blog-url"
+        label="Blog URL"
+        fullWidth
+        variant="outlined"
+        value={blogUrl}
+        onChange={({ target }) => setBlogUrl(target.value)}
+        sx={{ mb: 2 }}
+      />
+      <TextField
+        id="blog-likes"
+        label="Blog Likes"
+        fullWidth
+        variant="outlined"
+        value={blogLikes}
+        onChange={({ target }) => setBlogLikes(target.value)}
+        sx={{ mb: 2 }}
+      />
+      <Button type="submit" variant="contained">create</Button>
+    </Box>
   )
 }
 

@@ -12,4 +12,14 @@ export default defineConfig({
       },
     }
   },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './testSetup.js',
+    server: {
+      deps: {
+        inline: ['@mui/material', '@mui/system', '@emotion/react', '@emotion/styled'],
+      },
+    },
+  }
 })

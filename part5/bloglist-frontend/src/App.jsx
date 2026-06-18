@@ -1,17 +1,19 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link as RouterLink, useNavigate } from 'react-router-dom'
+import { AppBar, Toolbar, Container, Box, Button, Typography } from '@mui/material'
 import Blog from './components/Blog'
+import BlogView from './components/BlogView'
 import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
-import Togglable from './components/Togglable'
 
-const App = () => {
+const AppContent = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null)
-  const blogFormRef = useRef()
+  const navigate = useNavigate()
 
   useEffect(() => {
     blogService.getAll().then(initialBlogs => {
@@ -50,7 +52,11 @@ const App = () => {
   const handleDelete = (blog) => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
       blogService.remove(blog.id)
-        .then(() => setBlogs(blogs.filter(b => b.id !== blog.id)))
+        .then(() => {
+          setBlogs(blogs.filter(b => b.id !== blog.id))
+          showMessage('success', `blog ${blog.title} by ${blog.author} removed`)
+          navigate('/')
+        })
         .catch(error => {
           if (isSessionExpired(error)) forceLogout()
         })
@@ -67,10 +73,10 @@ const App = () => {
   }
 
   const addBlog = (blogObject) => {
-    blogFormRef.current.toggleVisibility()
     blogService.create(blogObject).then(returnedBlog => {
       setBlogs(blogs.concat(returnedBlog))
       showMessage('success', `a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
+      navigate('/')
     })
   }
 
@@ -81,65 +87,70 @@ const App = () => {
       blogService.setToken(user.token)
       setUser(user)
       showMessage('success', `welcome back ${user.name}`)
+      navigate('/')
     } catch {
       showMessage('error', 'wrong credentials')
     }
   }
 
-  const handleLogout = async (event) => {
+  const handleLogout = (event) => {
     event.preventDefault()
-
-    window.localStorage.removeItem(
-      'loggedBlogappUser', JSON.stringify(user)
-    )
-    setUser()
+    window.localStorage.removeItem('loggedBlogappUser')
+    setUser(null)
+    navigate('/')
   }
-
-  const logoutButton = () => (
-    <button onClick={handleLogout}>logout</button>
-  )
 
   const blogsToShow = blogs.slice().sort((a, b) => b.likes - a.likes)
 
-  const blogForm = () => (
-    <div>
-      <Togglable buttonLabel='new blog' ref={blogFormRef}>
-        <BlogForm createBlog={addBlog} />
-      </Togglable>
-    </div>
-  )
-
   return (
-    <div>
-      <h1>Blogs</h1>
-      <Notification message={message} />
+    <Container>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>Blog App</Typography>
+          <Button color="inherit" component={RouterLink} to="/">blogs</Button>
+          {user && (
+            <Button color="inherit" component={RouterLink} to="/create">new blog</Button>
+          )}
+          {user
+            ? <Button color="inherit" onClick={handleLogout}>logout</Button>
+            : <Button color="inherit" component={RouterLink} to="/login">login</Button>
+          }
+        </Toolbar>
+      </AppBar>
 
-      {!user && (
-        <Togglable buttonLabel="log in">
-          <LoginForm handleLogin={handleLogin} />
-        </Togglable>
-      )}
-      {user && (
-        <div>
-          <div>
-            <p>{user.name} logged in {logoutButton()} </p>
-          </div>
-          {blogForm()}
-          {blogsToShow.map(blog => (
-            <Blog
-              key={blog.id}
-              blog={blog}
+      <Box sx={{ px: 3, mt: 3 }}>
+        <Notification message={message} />
+        <Routes>
+          <Route path="/" element={
+            <Box>
+              <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>blogs</Typography>
+              <ul>
+                {blogsToShow.map(blog => (
+                  <Blog key={blog.id} blog={blog} />
+                ))}
+              </ul>
+            </Box>
+          } />
+          <Route path="/login" element={<LoginForm handleLogin={handleLogin} />} />
+          <Route path="/create" element={<BlogForm createBlog={addBlog} />} />
+          <Route path="/blogs/:id" element={
+            <BlogView
+              blogs={blogs}
               handleLike={handleLike}
               handleDelete={handleDelete}
               currentUser={user}
             />
-          ))}
-        </div>
-
-      )}
-
-    </div>
+          } />
+        </Routes>
+      </Box>
+    </Container>
   )
 }
+
+const App = () => (
+  <Router>
+    <AppContent />
+  </Router>
+)
 
 export default App
