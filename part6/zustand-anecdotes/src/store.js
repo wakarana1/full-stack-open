@@ -23,9 +23,6 @@ const useAnecdoteStore = create((set) => ({
       }))
       useNotificationStore.getState().actions.setNotification(`you voted for '${updated.content}'`)
     },
-    addAnecdote: (anecdote) => set((state) => ({
-      anecdotes: state.anecdotes.concat(anecdote),
-    })),
     remove: async (id) => {
       await anecdoteService.remove(id)
       set((state) => ({ anecdotes: state.anecdotes.filter((anecdote) => anecdote.id !== id)}))

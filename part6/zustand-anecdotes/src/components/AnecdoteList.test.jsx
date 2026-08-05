@@ -24,4 +24,15 @@ describe('AnecdoteList', () => {
     expect(body.indexOf('mid votes anecdote')).toBeLessThan(body.indexOf('low votes anecdote'))
   })
 
+  it('renders only anecdotes matching the store filter', () => {
+    useAnecdoteStore.setState({ filter: 'mid' })
+
+    render(<AnecdoteList />)
+
+    const body = document.body.textContent
+    expect(body).toContain('mid votes anecdote')
+    expect(body).not.toContain('low votes anecdote')
+    expect(body).not.toContain('high votes anecdote')
+  })
+
 })

@@ -1,11 +1,11 @@
 import { useNotification } from '../notificationStore'
 
 const Notification = () => {
-  
+
   const notification = useNotification()
-  
+
   if (!notification) return null
-  
+
   const style = {
     border: 'solid',
     padding: 10,

@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 
 const App = () => {
  const { initialize } = useAnecdoteActions()
- 
+
   useEffect(() => {
     initialize()
   }, [initialize])

@@ -1,21 +1,24 @@
+import { useRef } from 'react'
 import { useAnecdoteActions } from '../store'
 
 const AnecdoteForm = () => {
-  const { add } = useAnecdoteActions()
+  const actions = useAnecdoteActions()
+  const inputRef = useRef()
 
-  const addNote = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    const content = e.target.anecdote.value
-    await add(content)
-    e.target.reset()
+    actions.add(inputRef.current.value)
+    inputRef.current.value = ''
   }
 
   return (
     <div>
-      <h2>create new anecdote</h2>
-      <form onSubmit={addNote}>
-        <input name="anecdote" />
-        <button type="submit">create</button>
+      <h2>create new</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input ref={inputRef} />
+        </div>
+        <button>create</button>
       </form>
     </div>
   )

@@ -37,13 +37,18 @@
     },
     {
       "content": "holy guacamole",
-      "votes": 8,
+      "votes": 9,
       "id": "csIo8F8hK0Q"
     },
     {
       "content": "mada mada",
-      "votes": 8,
+      "votes": 9,
       "id": "o3cWCzEwZaY"
+    },
+    {
+      "content": "i have the power",
+      "votes": 4,
+      "id": "WJOEc6dGLQA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
