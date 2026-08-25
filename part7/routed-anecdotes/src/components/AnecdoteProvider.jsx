@@ -1,28 +1,8 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import anecdoteService from '../services/anecdotes'
+import { AnecdoteContext } from '../hooks'
 
-export const useField = (type) => {
-  const [value, setValue] = useState('')
-
-  const onChange = (event) => {
-    setValue(event.target.value)
-  }
-
-  const reset = () => {
-    setValue('')
-  }
-
-  return {
-    type,
-    value,
-    onChange,
-    reset
-  }
-}
-
-const AnecdoteContext = createContext()
-
-export const AnecdoteProvider = ({ children }) => {
+const AnecdoteProvider = ({ children }) => {
   const [anecdotes, setAnecdotes] = useState([])
 
   useEffect(() => {
@@ -46,4 +26,4 @@ export const AnecdoteProvider = ({ children }) => {
   )
 }
 
-export const useAnecdotes = () => useContext(AnecdoteContext)
+export default AnecdoteProvider
