@@ -18,10 +18,18 @@ const createNew = async (object) => {
   })
   
   if (!response.ok) {
-    throw new Error('Failed to create note')
+    throw new Error('Failed to create anecdote')
   }
   
   return await response.json()
 }
 
-export default { getAll, createNew }
+const deleteAnecdote = async (id) => {
+  const response = await fetch(`${baseUrl}/${id}`, {method: 'DELETE'})
+
+  if (!response.ok) {
+    throw new Error('Failed to delete anecdote')
+  }
+}
+
+export default { getAll, createNew, deleteAnecdote }
