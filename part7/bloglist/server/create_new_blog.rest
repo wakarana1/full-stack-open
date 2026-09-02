@@ -1,0 +1,16 @@
+GET http://localhost:3001/api/users/
+
+###
+GET http://localhost:3001/api/users/
+
+###
+POST http://localhost:3001/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Valid Blog",
+  "author": "Full Stack Dev",
+  "url": "www.google.com",
+  "likes": 1,
+  "userId": "6a10fdc9efd12cebf8a1f856"
+}
