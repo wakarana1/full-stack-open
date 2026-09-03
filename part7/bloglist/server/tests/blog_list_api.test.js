@@ -35,7 +35,7 @@ describe('read', () => {
   test('a specific blog is within the returned blogs', async () => {
     const response = await api.get('/api/blogs')
 
-    const title = response.body.map(e => e.title)
+    const title = response.body.map((e) => e.title)
     assert(title.includes('Brand New Blog'))
   })
 
@@ -89,7 +89,7 @@ describe('create', () => {
 
     assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
 
-    const title = blogsAtEnd.map(n => n.title)
+    const title = blogsAtEnd.map((n) => n.title)
     assert(title.includes('Valid Blog'))
   })
 
@@ -114,7 +114,7 @@ describe('create', () => {
     const blogsAtEnd = await helper.blogsInDb()
     assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
 
-    const addedBlog = blogsAtEnd.find(blog => blog.title === newBlog.title)
+    const addedBlog = blogsAtEnd.find((blog) => blog.title === newBlog.title)
     assert.strictEqual(addedBlog.likes, 0)
   })
 
@@ -181,7 +181,6 @@ describe('create', () => {
 
     assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length)
   })
-
 })
 
 describe('update', () => {
@@ -204,7 +203,7 @@ describe('update', () => {
     assert.strictEqual(response.body.title, newTitle)
 
     const blogsAtEnd = await helper.blogsInDb()
-    const updatedBlog = blogsAtEnd.find(blog => blog.id === blogToUpdate.id)
+    const updatedBlog = blogsAtEnd.find((blog) => blog.id === blogToUpdate.id)
     assert.strictEqual(updatedBlog.title, newTitle)
   })
 })
@@ -219,7 +218,7 @@ describe('delete', () => {
 
     const token = jwt.sign(
       { username: user.username, id: user.id },
-      process.env.SECRET
+      process.env.SECRET,
     )
 
     await api
@@ -231,7 +230,7 @@ describe('delete', () => {
 
     assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length - 1)
 
-    const ids = blogsAtEnd.map(n => n.id)
+    const ids = blogsAtEnd.map((n) => n.id)
     assert(!ids.includes(blogToDelete.id))
   })
 
@@ -244,7 +243,7 @@ describe('delete', () => {
 
     const token = jwt.sign(
       { username: user.username, id: user.id },
-      process.env.SECRET
+      process.env.SECRET,
     )
 
     await api
@@ -257,7 +256,6 @@ describe('delete', () => {
     assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length)
   })
 })
-
 
 after(async () => {
   await Blog.deleteMany({})

@@ -1,6 +1,19 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link as RouterLink, useNavigate } from 'react-router-dom'
-import { AppBar, Toolbar, Container, Box, Button, Typography } from '@mui/material'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link as RouterLink,
+  useNavigate,
+} from 'react-router-dom'
+import {
+  AppBar,
+  Toolbar,
+  Container,
+  Box,
+  Button,
+  Typography,
+} from '@mui/material'
 import Blog from './components/Blog'
 import BlogView from './components/BlogView'
 import Notification from './components/Notification'
@@ -17,7 +30,7 @@ const AppContent = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    blogService.getAll().then(initialBlogs => {
+    blogService.getAll().then((initialBlogs) => {
       setBlogs(initialBlogs)
     })
   }, [])
@@ -52,13 +65,14 @@ const AppContent = () => {
 
   const handleDelete = (blog) => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
-      blogService.remove(blog.id)
+      blogService
+        .remove(blog.id)
         .then(() => {
-          setBlogs(blogs.filter(b => b.id !== blog.id))
+          setBlogs(blogs.filter((b) => b.id !== blog.id))
           showMessage('success', `blog ${blog.title} by ${blog.author} removed`)
           navigate('/')
         })
-        .catch(error => {
+        .catch((error) => {
           if (isSessionExpired(error)) forceLogout()
         })
     }
@@ -66,17 +80,25 @@ const AppContent = () => {
 
   const handleLike = (blog) => {
     const updatedBlog = { ...blog, likes: blog.likes + 1 }
-    blogService.update(blog.id, updatedBlog)
-      .then(returnedBlog => setBlogs(blogs.map(b => b.id === returnedBlog.id ? returnedBlog : b)))
-      .catch(error => {
+    blogService
+      .update(blog.id, updatedBlog)
+      .then((returnedBlog) =>
+        setBlogs(
+          blogs.map((b) => (b.id === returnedBlog.id ? returnedBlog : b)),
+        ),
+      )
+      .catch((error) => {
         if (isSessionExpired(error)) forceLogout()
       })
   }
 
   const addBlog = (blogObject) => {
-    blogService.create(blogObject).then(returnedBlog => {
+    blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog))
-      showMessage('success', `a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
+      showMessage(
+        'success',
+        `a new blog ${returnedBlog.title} by ${returnedBlog.author} added`,
+      )
       navigate('/')
     })
   }
@@ -107,15 +129,26 @@ const AppContent = () => {
     <Container>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>Blog App</Typography>
-          <Button color="inherit" component={RouterLink} to="/">blogs</Button>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            Blog App
+          </Typography>
+          <Button color="inherit" component={RouterLink} to="/">
+            blogs
+          </Button>
           {user && (
-            <Button color="inherit" component={RouterLink} to="/create">new blog</Button>
+            <Button color="inherit" component={RouterLink} to="/create">
+              new blog
+            </Button>
           )}
-          {user
-            ? <Button color="inherit" onClick={handleLogout}>logout</Button>
-            : <Button color="inherit" component={RouterLink} to="/login">login</Button>
-          }
+          {user ? (
+            <Button color="inherit" onClick={handleLogout}>
+              logout
+            </Button>
+          ) : (
+            <Button color="inherit" component={RouterLink} to="/login">
+              login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
 
@@ -123,27 +156,43 @@ const AppContent = () => {
         <Box sx={{ px: 3, mt: 3 }}>
           <Notification message={message} />
           <Routes>
-            <Route path="/" element={
-              <Box>
-                <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>blogs</Typography>
-                <ul>
-                  {blogsToShow.map(blog => (
-                    <Blog key={blog.id} blog={blog} />
-                  ))}
-                </ul>
-              </Box>
-            } />
-            <Route path="/login" element={<LoginForm handleLogin={handleLogin} />} />
+            <Route
+              path="/"
+              element={
+                <Box>
+                  <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
+                    blogs
+                  </Typography>
+                  <ul>
+                    {blogsToShow.map((blog) => (
+                      <Blog key={blog.id} blog={blog} />
+                    ))}
+                  </ul>
+                </Box>
+              }
+            />
+            <Route
+              path="/login"
+              element={<LoginForm handleLogin={handleLogin} />}
+            />
             <Route path="/create" element={<BlogForm createBlog={addBlog} />} />
-            <Route path="/blogs/:id" element={
-              <BlogView
-                blogs={blogs}
-                handleLike={handleLike}
-                handleDelete={handleDelete}
-                currentUser={user}
-              />
-            } />
-            <Route path="*" element={<Typography variant="h5">404 - Page not found</Typography>} />
+            <Route
+              path="/blogs/:id"
+              element={
+                <BlogView
+                  blogs={blogs}
+                  handleLike={handleLike}
+                  handleDelete={handleDelete}
+                  currentUser={user}
+                />
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <Typography variant="h5">404 - Page not found</Typography>
+              }
+            />
           </Routes>
         </Box>
       </ErrorBoundary>

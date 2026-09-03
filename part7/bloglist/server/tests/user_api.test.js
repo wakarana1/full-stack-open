@@ -31,7 +31,7 @@ describe('when there is initially one user in db', async () => {
     const usersAtEnd = await helper.usersInDb()
     assert.strictEqual(usersAtEnd.length, usersAtStart.length + 1)
 
-    const usernames = usersAtEnd.map(u => u.username)
+    const usernames = usersAtEnd.map((u) => u.username)
     assert(usernames.includes(newUser.username))
   })
 
@@ -72,7 +72,11 @@ describe('when there is initially one user in db', async () => {
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
-    assert(result.body.error.includes('Path `username` (`ro`) is shorter than the minimum allowed length (3)'))
+    assert(
+      result.body.error.includes(
+        'Path `username` (`ro`) is shorter than the minimum allowed length (3)',
+      ),
+    )
 
     const usersAtEnd = await helper.usersInDb()
     assert.strictEqual(usersAtEnd.length, usersAtStart.length)

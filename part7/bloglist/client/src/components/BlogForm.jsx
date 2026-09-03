@@ -13,7 +13,7 @@ const BlogForm = ({ createBlog }) => {
       title: blogTitle,
       author: blogAuthor,
       url: blogUrl,
-      likes: blogLikes
+      likes: blogLikes,
     })
     setBlogTitle('')
     setBlogAuthor('')
@@ -23,7 +23,9 @@ const BlogForm = ({ createBlog }) => {
 
   return (
     <Box component="form" onSubmit={addBlog} sx={{ maxWidth: 500, mt: 2 }}>
-      <Typography variant="h5" gutterBottom>create new</Typography>
+      <Typography variant="h5" gutterBottom>
+        create new
+      </Typography>
       <TextField
         id="blog-title"
         label="Blog Title"
@@ -60,7 +62,9 @@ const BlogForm = ({ createBlog }) => {
         onChange={({ target }) => setBlogLikes(target.value)}
         sx={{ mb: 2 }}
       />
-      <Button type="submit" variant="contained">create</Button>
+      <Button type="submit" variant="contained">
+        create
+      </Button>
     </Box>
   )
 }

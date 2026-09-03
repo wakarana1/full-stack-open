@@ -13,8 +13,8 @@ const totalLikes = (blogs) => {
 const favoriteBlog = (blogs) => {
   let favoriteBlog = {}
 
-  blogs.forEach(blog => {
-    if(Object.keys(favoriteBlog).length === 0) {
+  blogs.forEach((blog) => {
+    if (Object.keys(favoriteBlog).length === 0) {
       favoriteBlog = blog
     } else {
       favoriteBlog = favoriteBlog['likes'] > blog['likes'] ? favoriteBlog : blog
@@ -27,7 +27,7 @@ const favoriteBlog = (blogs) => {
 const mostBlogs = (blogs) => {
   return _.maxBy(
     _.map(_.countBy(blogs, 'author'), (blogs, author) => ({ author, blogs })),
-    'blogs'
+    'blogs',
   )
 }
 
@@ -37,7 +37,7 @@ const mostLikes = (blogs) => {
       author,
       likes: _.sumBy(authorBlogs, 'likes'),
     })),
-    'likes'
+    'likes',
   )
 }
 
@@ -46,5 +46,5 @@ module.exports = {
   totalLikes,
   favoriteBlog,
   mostBlogs,
-  mostLikes
+  mostLikes,
 }

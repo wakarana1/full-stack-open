@@ -18,10 +18,14 @@ describe('Blog', () => {
     render(
       <MemoryRouter>
         <Blog blog={blog} />
-      </MemoryRouter>
+      </MemoryRouter>,
     )
-    expect(screen.getByRole('link', { name: 'Test Blog Title Test Author' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Test Blog Title Test Author' })).toHaveAttribute('href', '/blogs/abc123')
+    expect(
+      screen.getByRole('link', { name: 'Test Blog Title Test Author' }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: 'Test Blog Title Test Author' }),
+    ).toHaveAttribute('href', '/blogs/abc123')
   })
 })
 

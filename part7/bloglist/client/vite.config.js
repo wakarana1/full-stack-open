@@ -10,7 +10,7 @@ export default defineConfig({
         target: 'http://localhost:3001',
         changeOrigin: true,
       },
-    }
+    },
   },
   test: {
     environment: 'jsdom',
@@ -18,8 +18,13 @@ export default defineConfig({
     setupFiles: './testSetup.js',
     server: {
       deps: {
-        inline: ['@mui/material', '@mui/system', '@emotion/react', '@emotion/styled'],
+        inline: [
+          '@mui/material',
+          '@mui/system',
+          '@emotion/react',
+          '@emotion/styled',
+        ],
       },
     },
-  }
+  },
 })

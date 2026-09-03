@@ -14,7 +14,9 @@ const LoginForm = ({ handleLogin }) => {
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mt: 4 }}>
-      <Typography variant="h4" gutterBottom>Log in to application</Typography>
+      <Typography variant="h4" gutterBottom>
+        Log in to application
+      </Typography>
       <TextField
         fullWidth
         variant="standard"
@@ -32,7 +34,9 @@ const LoginForm = ({ handleLogin }) => {
         onChange={({ target }) => setPassword(target.value)}
         sx={{ mb: 3 }}
       />
-      <Button type="submit" variant="contained">login</Button>
+      <Button type="submit" variant="contained">
+        login
+      </Button>
     </Box>
   )
 }

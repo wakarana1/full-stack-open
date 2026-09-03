@@ -19,8 +19,8 @@ describe('total likes', () => {
       author: 'Edsger W. Dijkstra',
       url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
       likes: 5,
-      __v: 0
-    }
+      __v: 0,
+    },
   ]
 
   test('when list has only one blog, equals the likes of that', () => {
@@ -37,7 +37,7 @@ describe('favorite blog', () => {
       author: 'Edsger W. Dijkstra',
       url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
       likes: 5,
-      __v: 0
+      __v: 0,
     },
     {
       _id: '6b533bb82c65b787345e28g9',
@@ -45,7 +45,7 @@ describe('favorite blog', () => {
       author: 'Charlie Chaplin',
       url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
       likes: 2,
-      __v: 0
+      __v: 0,
     },
     {
       _id: '1g433ii42c47n5896473e33i1',
@@ -53,8 +53,8 @@ describe('favorite blog', () => {
       author: 'Blogger McBloggerton',
       url: 'https://www.google.com',
       likes: 0,
-      __v: 0
-    }
+      __v: 0,
+    },
   ]
 
   test('return the most liked blog in the list', () => {
@@ -65,7 +65,7 @@ describe('favorite blog', () => {
       author: 'Edsger W. Dijkstra',
       url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
       likes: 5,
-      __v: 0
+      __v: 0,
     })
   })
 })
@@ -78,7 +78,7 @@ describe('find the most', () => {
       author: 'Edsger W. Dijkstra',
       url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
       likes: 5,
-      __v: 0
+      __v: 0,
     },
     {
       _id: '6b533bb82c65b787345e28g9',
@@ -86,7 +86,7 @@ describe('find the most', () => {
       author: 'Charlie Chaplin',
       url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
       likes: 2,
-      __v: 0
+      __v: 0,
     },
     {
       _id: '1g433ii42c47n5896473e33i1',
@@ -94,7 +94,7 @@ describe('find the most', () => {
       author: 'Blogger McBloggerton',
       url: 'https://www.google.com',
       likes: 0,
-      __v: 0
+      __v: 0,
     },
     {
       _id: '1g433ii42c47n5896473e33i2',
@@ -102,18 +102,17 @@ describe('find the most', () => {
       author: 'Blogger McBloggerton',
       url: 'https://www.google.com',
       likes: 0,
-      __v: 0
-    }
+      __v: 0,
+    },
   ]
 
   test('returns the author with the most blogs', () => {
     const result = listHelper.mostBlogs(blogList)
     assert.deepStrictEqual(result, {
       author: 'Blogger McBloggerton',
-      blogs: 2
+      blogs: 2,
     })
   })
-
 })
 describe('most likes', () => {
   const blogList = [
@@ -123,7 +122,7 @@ describe('most likes', () => {
       author: 'Edsger W. Dijkstra',
       url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
       likes: 5,
-      __v: 0
+      __v: 0,
     },
     {
       _id: '6b533bb82c65b787345e28g9',
@@ -131,7 +130,7 @@ describe('most likes', () => {
       author: 'Charlie Chaplin',
       url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
       likes: 2,
-      __v: 0
+      __v: 0,
     },
     {
       _id: '7b533bb82c65b787345e29g9',
@@ -139,7 +138,7 @@ describe('most likes', () => {
       author: 'Charlie Chaplin',
       url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
       likes: 4,
-      __v: 0
+      __v: 0,
     },
     {
       _id: '1g433ii42c47n5896473e33i1',
@@ -147,7 +146,7 @@ describe('most likes', () => {
       author: 'Blogger McBloggerton',
       url: 'https://www.google.com',
       likes: 0,
-      __v: 0
+      __v: 0,
     },
     {
       _id: '1g433ii42c47n5896473e33i2',
@@ -155,15 +154,15 @@ describe('most likes', () => {
       author: 'Blogger McBloggerton',
       url: 'https://www.google.com',
       likes: 0,
-      __v: 0
-    }
+      __v: 0,
+    },
   ]
 
   test('resturn the author with the most likes', () => {
     const result = listHelper.mostLikes(blogList)
     assert.deepStrictEqual(result, {
       author: 'Charlie Chaplin',
-      likes: 6
+      likes: 6,
     })
   })
 })

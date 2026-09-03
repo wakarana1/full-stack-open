@@ -8,7 +8,7 @@ const initialBlogs = [
     author: 'Full Stack Dev',
     url: 'www.google.com',
     likes: 0,
-    __v: 0
+    __v: 0,
   },
   {
     _id: '5a422aa71b54a676234d17f8',
@@ -16,8 +16,8 @@ const initialBlogs = [
     author: 'Edsger W. Dijkstra',
     url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
     likes: 5,
-    __v: 0
-  }
+    __v: 0,
+  },
 ]
 
 const initialUsers = [
@@ -30,7 +30,7 @@ const initialUsers = [
     username: 'SecondUser',
     name: 'Matti Luukkainen',
     password: 'salainen',
-  }
+  },
 ]
 
 const nonExistingId = async () => {
@@ -48,24 +48,29 @@ const nonExistingId = async () => {
 
 const blogsInDb = async () => {
   const blogs = await Blog.find({})
-  return blogs.map(blog => blog.toJSON())
+  return blogs.map((blog) => blog.toJSON())
 }
 
 const usersInDb = async () => {
   const users = await User.find({})
-  return users.map(user => user.toJSON())
+  return users.map((user) => user.toJSON())
 }
 
 const initialBlogsWithUser = async () => {
   const users = await usersInDb()
   const user = users[0]
 
-  return initialBlogs.map(blog => ({
+  return initialBlogs.map((blog) => ({
     ...blog,
-    user: user.id
+    user: user.id,
   }))
 }
 
 module.exports = {
-  initialBlogs, initialUsers, nonExistingId, blogsInDb, usersInDb, initialBlogsWithUser
+  initialBlogs,
+  initialUsers,
+  nonExistingId,
+  blogsInDb,
+  usersInDb,
+  initialBlogsWithUser,
 }
